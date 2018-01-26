@@ -1,0 +1,48 @@
+package qi.liang.liu.onlinebanking.domain.security;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+
+/**
+ * In this system, we have two kind of roles
+ * 1. admin
+ * 2. user
+ */
+@Entity
+public class Role {
+    @Id
+    private Integer roleId;
+
+    private String name;
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<UserRole> userRoles = new HashSet<>();
+
+
+    public Role(){}
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
